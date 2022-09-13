@@ -1,0 +1,8 @@
+*/build
+*/*/build
+*/*.wts
+*/*.ppm
+*idea*
+*/.vscode
+*/a.out
+*/main

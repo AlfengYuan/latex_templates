@@ -1,0 +1,50 @@
+\documentclass[11pt, twoside, a4paper]{article}
+\usepackage{ctex}
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+\usepackage{amsmath}
+\usepackage{verbatim}
+\usepackage{float}
+\usepackage{floatpag}
+\usepackage[top=2cm, bottom=0cm, left=2cm, right=2cm]{geometry}
+
+\begin{document}
+        \renewcommand{\algorithmicrequire}{\textbf{Input:}}
+        \renewcommand{\algorithmicensure}{\textbf{Output:}}
+    \begin{algorithm}[h]
+        \renewcommand{\thealgorithm}{2-3}
+        \caption{Propagation step two}
+        \begin{algorithmic}[1]
+            \Require
+            G
+            \Ensure
+            Communities $P = \{C1, C2, ..., C_n\}$
+            \State $labelForNetwork \gets getSubNetwork(G)$
+            \State $sSubDict \gets initializeSubSimilarityMatrix(G) $
+            \State $partition \gets getResult(labelForNetwork) $
+            \State $state2 \gets False $
+            \While{$state2 == False$}
+            \If{$len(partition) == 2$}
+            \State break
+            \EndIf
+            \State $labelOrder \gets initializeLabelOrder(labelForNetwork) $
+            \State $curPartition \gets getResult(labelForNetwork) $
+            \State $maxQ \gets modularity(G1, curPartition) $
+            \For{$label$ in $labelOrder$}
+            \State $updateNetworkLabel(labelForNetwork, label) $
+            \EndFor
+            \State $curPartition \gets getResult(labelForNetwork)$
+            \State $currentQ \gets modularity(G1, curPartition) $
+            \If{$currentQ \ge maxQ $}
+            \State $partition \gets curPartition $
+            \EndIf
+            \If{$len(labelForNetwork) == 2$}
+            \State $state2 \gets True $
+            \State break
+            \EndIf
+            \EndWhile
+            \State \Return $partition$
+        \end{algorithmic}
+    \end{algorithm}
+\end{document}
